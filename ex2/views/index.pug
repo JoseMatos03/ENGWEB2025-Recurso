@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/w3.css")
+  body(class="w3-container")
+    header(class="w3-container w3-blue w3-padding-16 w3-center")
+      h1= title
+    table(class="w3-table-all w3-striped w3-margin-top")
+      thead
+        tr
+          th ID
+          th Nome
+          th Categoria
+          th Criador
+      tbody
+        each c in cocktails
+          tr
+            td
+              a(href=`/cocktails/${c._id}`)= c._id
+            td= c.nome
+            td= c.categoria || '—'
+            td
+              if c.criador && creatorsMap[c.criador.id]
+                a(href=`/criadores/${c.criador.id}`)= creatorsMap[c.criador.id]
+              else
+                | —
+    footer(class="w3-container w3-light-grey w3-padding-16 w3-margin-top w3-center")
+      span Criado em: 18/06/2025; Autor: José Matos

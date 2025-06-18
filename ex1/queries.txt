@@ -1,0 +1,39 @@
+// 1
+db.cocktails.countDocuments({ criador: { $exists: true } });
+
+// 2
+db.cocktails.countDocuments({ categoria: "ordinarydrink" });
+
+// 3
+db.cocktails.distinct("ingredientes").sort();
+
+// 4
+db.cocktails.aggregate([
+  { $unwind: "$ingredientes" },
+  { $group: {
+      _id: "$ingredientes",
+      count: { $sum: 1 }
+  }},
+  { $project: {
+      ingrediente: "$_id",
+      count: 1,
+      _id: 0
+  }},
+  { $sort: { ingrediente: 1 } }
+]);
+
+// 5
+db.cocktails.aggregate([
+  { $match: { criador: { $exists: true } } },
+  { $group: {
+      _id: { id: "$criador.id", nome: "$criador.nome" },
+      count: { $sum: 1 }
+  }},
+  { $project: {
+      criadorId: "$_id.id",
+      criadorNome: "$_id.nome",
+      count: 1,
+      _id: 0
+  }},
+  { $sort: { criadorNome: 1 } }
+]);

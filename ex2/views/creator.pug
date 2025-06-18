@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title=`Coquetéis de ${creator.nome}`
+    link(rel="stylesheet", href="/w3.css")
+  body(class="w3-container")
+    header(class="w3-container w3-indigo w3-padding-16 w3-center")
+      h1 Coquetéis de #{creator.nome}
+    table(class="w3-table-all w3-striped w3-margin-top")
+      thead
+        tr
+          th ID
+          th Nome
+          th Categoria
+          th Ingredientes
+      tbody
+        each c in cocktails
+          tr
+            td
+              a(href=`/cocktails/${c._id}`)= c._id
+            td= c.nome
+            td= c.categoria || '—'
+            td
+              ul
+                each ing in c.ingredientes
+                  li= ing
+    a(href='/', class="w3-button w3-light-grey w3-margin-top w3-center") Voltar à página principal

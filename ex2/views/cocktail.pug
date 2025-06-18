@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet", href="/w3.css")
+  body(class="w3-container")
+    header(class="w3-container w3-teal w3-padding-16 w3-center")
+      h1= cocktail.nome
+    if cocktail.foto
+      img(src=cocktail.foto, alt=cocktail.nome, class="w3-image w3-margin-top w3-round")
+    dl(class="w3-list w3-margin-top")
+      dt ID
+      dd= cocktail._id
+      dt Nome
+      dd= cocktail.nome
+      dt Categoria
+      dd= cocktail.categoria || '—'
+      dt Criador
+      dd
+        if cocktail.criador
+          a(href=`/criadores/${cocktail.criador.id}`)= cocktail.criador.nome
+        else
+          | —
+      dt Preparação
+      dd= cocktail.preparacao
+      dt Ingredientes
+      dd
+        ul
+          each ing in cocktail.ingredientes
+            li= ing
+    a(href='/', class="w3-button w3-light-grey w3-margin-top") Voltar à página principal
