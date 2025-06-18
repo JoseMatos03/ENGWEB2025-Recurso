@@ -57,7 +57,6 @@ router.get('/criadores/:id', async (req, res) => {
     );
 
     res.render('creator', {
-      title: `Cocktails de ${creatorEntry.criador.nome}`,
       creator: creatorEntry.criador,
       cocktails: cocktailsDetails
     });
