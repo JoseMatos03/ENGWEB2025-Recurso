@@ -19,7 +19,6 @@ router.get('/', async (req, res) => {
       title: 'Catálogo de Cocktails',
       cocktails,
       creatorsMap,
-      generatedAt: new Date()
     });
   } catch (err) {
     console.error(err);
